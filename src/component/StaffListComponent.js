@@ -101,7 +101,7 @@ export default class StaffListComponent extends Component {
         return (
             <div>
                 <Header />
-                <div className="mt-2">
+                <div className="mt-2 mx-auto">
                     <button type="button" className="btn btn-warning" style={styleButton} onClick={() => this.changeCol('rest')}>Chế độ hiển thị </button>
                     <button type="button" className="btn btn-secondary" style={styleButton} onClick={() => this.changeCol('2')}>2 cột</button>
                     <button type="button" className="btn btn-secondary" style={styleButton} onClick={() => this.changeCol('3')}>3 cột</button>
