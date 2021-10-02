@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input, Col } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Col } from 'reactstrap';
 
 export default class ModalThemMoi extends Component {
     constructor(props) {
