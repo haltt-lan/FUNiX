@@ -124,8 +124,10 @@ class ModalThemMoiRedux extends Component {
                                     }} />
                                 </Col>
                             </Row>
-                            <Button color="success" type="submit">Thêm Mới</Button>{' '}
+                            <Col sm={12}>
+                            <Button color="success" type="submit" style={{marginLeft:'30%',marginRight:'10px'}}>Thêm Mới</Button>{' '}
                             <Button color="danger" onClick={this.renderThemMoi}>Cancel</Button>
+                           </Col>
                         </LocalForm>
                     </ModalBody>
 

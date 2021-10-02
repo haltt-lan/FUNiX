@@ -46,9 +46,5 @@ class DataSearchBangLuong extends Component {
 
     }
 }
-const mapStateToProps = (state) => {
-    return {
-        arrSearch: state.DataReducer.arrSearch,
-    }
-}
-export default connect(mapStateToProps,null)(DataSearchBangLuong)
+
+export default DataSearchBangLuong

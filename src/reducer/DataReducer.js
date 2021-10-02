@@ -11,16 +11,6 @@ const initialState = {
 }
 export const DataReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'handle_Search':{
-            const {keyword} =action;
-            console.log(keyword);
-            let arrSearchNew = [...state.arrSearch];
-            arrSearchNew = state.list.filter(data => data.name.toLowerCase().includes(keyword.toLowerCase()))
-            state.arrSearch = arrSearchNew;
-            return { ...state }
-        }
-            
-
         case 'ADD_STAFF': {
             const { values } = action;
             const renderDep = (item) => {

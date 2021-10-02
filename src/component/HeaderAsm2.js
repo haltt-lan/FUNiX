@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import './Header.css';
 import {connect} from 'react-redux'
@@ -13,14 +13,12 @@ class HeaderAsm2 extends Component {
             collapsed: true
         }
     }
-    // searchAd = () => {
-    //         return ('/home/data/search')
-    // }
-    // searchAd = () => {
-    //     if (this.props.match.url === '/bangluong'||this.props.match.url === '/bangluong/search') {
-    //         return ('/bangluong/search')
-    //     } else { return ('/home/data/search') }
-    // }
+    
+    searchAd = () => {
+        if (this.props.match.url === '/bangluong'||this.props.match.url === '/bangluong/search') {
+            return ('/bangluong/search')
+        } else { return ('/home/data/search') }
+    }
 
     toggleNavbar = () => {
         this.setState({
@@ -28,6 +26,7 @@ class HeaderAsm2 extends Component {
         })
     }
     render() {
+        console.log('header',this.props);
         return (
             <Fragment>
 
@@ -64,7 +63,7 @@ class HeaderAsm2 extends Component {
                             <div className="col-md-4 col-12">
                                 <div className="input-group mt-2">
                                     <input type="text" className="form-control" placeholder="Search..." ref={this.input} />
-                                    <Link to='home/data/search'>
+                                    <Link to={this.searchAd()}> 
                                         <button className="btn bg-secondary" type="submit" onClick={() => { this.props.handleSearch(this.input.current.value) }}><i className="fa fa-search text-white"></i></button>
                                     </Link>
                                 </div>
@@ -77,18 +76,6 @@ class HeaderAsm2 extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        handleSearch: (keyword) => {
-            const action= {
-                type: 'handle_Search',
-                keyword
-            }
-            dispatch (action)
-        }
-    }
 
-}
-// export default withRouter(HeaderAsm2)
-export default connect(null,mapDispatchToProps) (HeaderAsm2)
+export default withRouter(HeaderAsm2)
 

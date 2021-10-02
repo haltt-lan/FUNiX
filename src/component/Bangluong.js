@@ -68,7 +68,7 @@ class Bangluong extends Component {
     render() {
         return (
             <Fragment>
-                <HeaderAsm2 handleSearch={this.props.handleSearch} keyword={this.props.keyword}/>
+                <HeaderAsm2 handleSearch={this.props.handleSearch}/>
                 <div className="container mt-3">
                     <label className="m-2 text-danger"><b>Bộ lọc sắp xếp</b></label>
                     <select onChange={(e) => this.chooseMethodSort(e)}>

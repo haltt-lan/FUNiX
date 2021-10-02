@@ -31,7 +31,7 @@ import {connect} from 'react-redux'
         
         return (
             <Fragment>
-                <HeaderAsm2/>
+                <HeaderAsm2 handleSearch={this.props.handleSearch}/>
                 <div className="container">
                     <div className="mb-2 mt-2" style={{'display':'flex','justifyContent':'space-between'}}>
                     <h4>DANH SÁCH NHÂN VIÊN</h4>  

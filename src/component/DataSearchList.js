@@ -6,7 +6,7 @@ import {connect} from 'react-redux';
 
 class DataSearchList extends Component {
     renderList = () => {
-        let { arrSearch } = this.props;
+        const { arrSearch } = this.props;
         return (arrSearch.map((x, index) => {
             return (
                 <div className='col-lg-2 col-md-4 col-6 '>
@@ -41,9 +41,5 @@ class DataSearchList extends Component {
 
     }
 }
-const mapStateToProps = (state) => {
-    return {
-        arrSearch: state.DataReducer.arrSearch,
-    }
-}
-export default connect (mapStateToProps, null) (DataSearchList)
+
+export default DataSearchList
