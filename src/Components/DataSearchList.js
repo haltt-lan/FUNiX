@@ -8,7 +8,7 @@ export default class DataSearchList extends Component {
         let { item } = this.props;
         return (item.map((x, index) => {
             return (
-                <div className='col-lg-2 col-md-4 col-sm-6 '>
+                <div className='col-lg-2 col-md-4 col-6 '>
                     <Link style={{ textDecoration: 'none' }} className="text-dark" to={`/home/${x.id}`} >
                         <Card key={index}>
                             <CardImg top width='100%' src={x.image} alt='Card image cap' />
@@ -27,7 +27,7 @@ export default class DataSearchList extends Component {
     render() {
         return (
             <Fragment>
-                <HeaderAsm2 handleSearch={this.props.handleSearch} keyword={this.props.keyword}/>
+                <HeaderAsm2 handleSearch={this.props.handleSearch}/>
                 <div className="container">
                     <h4 className="text-success text-center m-2" > Danh sách tìm kiếm </h4>
                     <div className="row">

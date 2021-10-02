@@ -8,7 +8,7 @@ export default class DataSearchBangLuong extends Component {
         const { item } = this.props;
         return (item.map((x, index) => {
             return (
-                <div className='col-lg-4 col-md-6 col-sm-12'>
+                <div className='col-lg-4 col-md-6 col-12'>
                     <Link to={`/home/${x.id}`} style={{ textDecoration: 'none' }} className="text-dark">
                         <Card key={index}>
                             <CardBody>
@@ -32,7 +32,7 @@ export default class DataSearchBangLuong extends Component {
     render() {
         return (
             <Fragment>
-                <HeaderAsm2 handleSearch={this.props.handleSearch} keyword={this.props.keyword}/>
+                <HeaderAsm2 handleSearch={this.props.handleSearch}/>
                 <div className="container">
                     <h4 className="text-success text-center m-2" > Danh sách tìm kiếm </h4>
                     <div className="row">

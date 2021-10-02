@@ -43,7 +43,7 @@ class Bangluong extends Component {
             var result = (item.salaryScale * basicSalary) + (item.overTime * overTimeSalary);
             item.salary = result;
             return (
-                <div className='col-lg-4 col-md-6 col-sm-12'>
+                <div className='col-lg-4 col-md-6 col-12'>
                     <Link to={`/home/${item.id}`} style={{ textDecoration: 'none' }} className="text-dark">
                         <Card key={index}>
                             <CardBody>

@@ -4,7 +4,7 @@ import { Card, CardTitle, CardText } from 'reactstrap';
 import HeaderAsm2 from './HeaderAsm2';
 
 
-export default class StaffListComponent extends Component {
+export default class Phongban extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -12,9 +12,9 @@ export default class StaffListComponent extends Component {
         }
     }
     renderList = () => {
-        return this.props.list.map((item, index) => {
+        return this.props.departments.map((item, index) => {
             return (
-                <div className='col-lg-4 col-md-6 col-sm-12'>
+                <div className='col-lg-4 col-md-6 col-12'>
                     <Card body outline color="secondary" onClick={() => this.detailList(item)}>
                         <CardTitle tag="h5" style={{ textAlign: 'center' }}>{item.name}</CardTitle>
                         <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
@@ -32,8 +32,8 @@ export default class StaffListComponent extends Component {
     }
 
     renderDetailList = () => {
-        if (this.state.selectedDepartment != null) {
-            const x = this.props.param.filter(item => item.department.name === this.state.selectedDepartment.name)
+        if (this.state.selectedDepartment) {
+            const x = this.props.list.filter(item => item.department.name === this.state.selectedDepartment.name)
             return (
                 <Fragment>
                     <tr>
@@ -53,7 +53,7 @@ export default class StaffListComponent extends Component {
     render() {
         return (
             <Fragment>
-                <HeaderAsm2 handleSearch={this.props.handleSearch} keyword={this.props.keyword}/>
+                <HeaderAsm2 handleSearch={this.props.handleSearch}/>
                 <div className="container mt-3">
                     <div className="row">
                         {this.renderList()}

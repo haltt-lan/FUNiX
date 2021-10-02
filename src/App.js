@@ -17,12 +17,21 @@ export default class App extends Component {
       list: STAFFS,
       departments: DEPARTMENTS,
       arrSearch: [],
-      keyword: ''
+      
     };
     //   this.handleSearch=this.handleSearch.bind(this)
     // this.handleSubmit=this.handleSubmit.bind(this)
   }
-
+ addStaff = (myobj) => {
+   let newList= [...this.state.list];
+   newList.push(myobj)
+   console.log(newList)
+  
+   this.setState({
+     list: newList
+   })
+   
+ }
 
   handleSearch = (keyword) => {
     console.log(keyword)
@@ -41,10 +50,11 @@ export default class App extends Component {
       <div>
         <BrowserRouter>
           <Switch>
-            <Route exact path='/home' component={() => <ListStaff list={this.state.list} handleSearch={this.handleSearch} /> } />
+            <Route exact path='/home' component={() => <ListStaff list={this.state.list} departments={this.state.departments} 
+            handleSearch={this.handleSearch} addStaff={this.addStaff} />} />
             <Route exact path='/home/data/search' component={() => <DataSearchList item={this.state.arrSearch} handleSearch={this.handleSearch} />} />
             <Route exact path='/home/:id' component={StaffWithId} />
-            <Route path='/phongban' component={() => <Phongban list={this.state.departments} param={this.state.list} handleSearch={this.handleSearch} />} />
+            <Route path='/phongban' component={() => <Phongban departments={this.state.departments} list={this.state.list} handleSearch={this.handleSearch} />} />
             <Route exact path='/bangluong' component={() => <Bangluong list={this.state.list} handleSearch={this.handleSearch} />} />
             <Route exact path='/bangluong/search' component={() => <DataSearchBangLuong item={this.state.arrSearch} handleSearch={this.handleSearch} />} />
             <Redirect to='/home' />
