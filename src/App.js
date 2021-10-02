@@ -24,7 +24,7 @@ import {connect} from 'react-redux'
           <Switch>
             <Route exact path='/home' component={() => <ListStaff />} />
             <Route exact path='/home/data/search' component={() => <DataSearchList />} />
-            <Route exact path='/home/:id' component={<DetailStaff />} />
+            <Route exact path='/home/:id' component={StaffWithId} />
             <Route path='/phongban' component={() => <Phongban />} />
             <Route exact path='/bangluong' component={() => <Bangluong />} />
             <Route exact path='/bangluong/search' component={() => <DataSearchBangLuong />} />

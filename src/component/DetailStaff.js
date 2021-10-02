@@ -3,9 +3,6 @@ import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import HeaderAsm2 from './HeaderAsm2';
-import {connect} from 'react-redux'
-
-
 
 function DetailStaff(props) {
 
@@ -35,7 +32,5 @@ function DetailStaff(props) {
         </Fragment>
     ) : null
 }
-
-
 
 export default DetailStaff

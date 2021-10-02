@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Label } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { connect } from 'react-redux';
 
@@ -10,7 +10,6 @@ const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => !(val) || (val.length >= len);
 const isNumberPos = (val) => !(val) || (!isNaN(Number(val)) && Number(val) >= 0);
 const isNumberHSL = (val) => !(val) || (!isNaN(Number(val)) && Number(val) >= 1 && Number(val) <= 3);
-
 
 class ModalThemMoiRedux extends Component {
     constructor(props) {
@@ -23,7 +22,7 @@ class ModalThemMoiRedux extends Component {
     renderThemMoi = () => this.setState({ show: !this.state.show })
 
     submitThemMoi = (values) => {
-        alert('hello')
+        this.props.addStaff(values)
     }
     render() {
         return (
@@ -34,8 +33,8 @@ class ModalThemMoiRedux extends Component {
                     <ModalBody>
                         <LocalForm onSubmit={(values) => this.submitThemMoi(values)}>
                             <Row className="form-group mb-2">
-                                <Label for="name" md={3}>Tên</Label>
-                                <Col md={9}>
+                                <Label for="name" md={3} sm={12}>Tên</Label>
+                                <Col md={9} sm={12}>
                                     <Control.text model=".name" id="name" name="name" className="form-control"
                                         validators={{
                                             required, minLength: minLength(2), maxLength: maxLength(30)
@@ -46,9 +45,9 @@ class ModalThemMoiRedux extends Component {
                                 </Col>
                             </Row>
 
-                            {/* <Row className="form-group mb-2">
-                                <Label for="doB" md={3}>Ngày sinh</Label>
-                                <Col md={9}>
+                            <Row className="form-group mb-2">
+                                <Label for="doB" md={3} sm={12}>Ngày sinh</Label>
+                                <Col md={9} sm={12}>
                                     <Control.text type="date" model=".doB" id="doB" name="doB" className="form-control"
                                         validators={{
                                             required
@@ -59,8 +58,8 @@ class ModalThemMoiRedux extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group mb-2">
-                                <Label for="date" md={3}>Ngày vào công ty</Label>
-                                <Col md={9}>
+                                <Label for="date" md={3} sm={12}>Ngày vào công ty</Label>
+                                <Col md={9} sm={12}>
                                     <Control.text type="date" model=".startDate" id="startDate" name="startDatee" className="form-control"
                                         validators={{
                                             required
@@ -69,10 +68,10 @@ class ModalThemMoiRedux extends Component {
                                         required: "bắt buộc"
                                     }} />
                                 </Col>
-                            </Row> */}
+                            </Row>
                             <Row className="form-group mb-2">
-                                <Label for="department" md={3}>Phòng ban</Label>
-                                <Col md={9}>
+                                <Label for="department" md={3} sm={12}>Phòng ban</Label>
+                                <Col md={9} sm={12}>
                                     <Control.select model=".department" id="department" name="department" className="form-control"
                                         validators={{
                                             required
@@ -90,8 +89,8 @@ class ModalThemMoiRedux extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group mb-2">
-                                <Label for="salaryScale" md={3}>Hệ số lương</Label>
-                                <Col md={9}>
+                                <Label for="salaryScale" md={3} sm={12}>Hệ số lương</Label>
+                                <Col md={9} sm={12}>
                                     <Control.text type="number" model=".salaryScale" id="salaryScale" name="salaryScale" className="form-control"
                                         validators={{
                                             required, isNumberHSL
@@ -102,8 +101,8 @@ class ModalThemMoiRedux extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group mb-2">
-                                <Label for="annualLeave" md={3}>Số ngày nghỉ còn lại</Label>
-                                <Col md={9}>
+                                <Label for="annualLeave" md={3} sm={12}>Số ngày nghỉ còn lại</Label>
+                                <Col md={9} sm={12}>
                                     <Control.text type="number" model=".annualLeave" id="annualLeave" name="annualLeave" className="form-control"
                                         validators={{
                                             required, isNumberPos
@@ -114,8 +113,8 @@ class ModalThemMoiRedux extends Component {
                                 </Col>
                             </Row>
                             <Row className="form-group mb-2">
-                                <Label for="overTime" md={3}>Số ngày đã làm thêm</Label>
-                                <Col md={9}>
+                                <Label for="overTime" md={3} sm={12}>Số ngày đã làm thêm</Label>
+                                <Col md={9} sm={12}>
                                     <Control.text type="number" model=".overTime" id="overTime" name="overTime" className="form-control"
                                         validators={{
                                             required, isNumberPos
@@ -125,26 +124,26 @@ class ModalThemMoiRedux extends Component {
                                     }} />
                                 </Col>
                             </Row>
+                            <Button color="success" type="submit">Thêm Mới</Button>{' '}
+                            <Button color="danger" onClick={this.renderThemMoi}>Cancel</Button>
                         </LocalForm>
                     </ModalBody>
-                    <ModalFooter>
-                        <Button color="success" type="submit">Thêm Mới</Button>{' '}
-                        <Button color="danger" onClick={this.renderThemMoi}>Cancel</Button>
-                    </ModalFooter>
+
                 </Modal>
             </Fragment>
         )
     }
 }
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         submitThemMoi :(values)=>{
-//         const action = {
-//             type:'SUBMIT_THEMMOI',
-//             values
-//         }
-// dispatch(action)
-//         }
-//     }
-// }
-export default ModalThemMoiRedux
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addStaff: (values) => {
+           
+            const action = {
+                type: 'ADD_STAFF',
+                values
+            }
+            dispatch(action)
+        }
+    }
+}
+export default connect(null, mapDispatchToProps)(ModalThemMoiRedux)

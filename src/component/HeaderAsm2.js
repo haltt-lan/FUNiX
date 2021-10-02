@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Link, NavLink, withRouter } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem } from 'reactstrap';
 import './Header.css';
 import {connect} from 'react-redux'
@@ -13,9 +13,9 @@ class HeaderAsm2 extends Component {
             collapsed: true
         }
     }
-    searchAd = () => {
-            return ('/home/data/search')
-    }
+    // searchAd = () => {
+    //         return ('/home/data/search')
+    // }
     // searchAd = () => {
     //     if (this.props.match.url === '/bangluong'||this.props.match.url === '/bangluong/search') {
     //         return ('/bangluong/search')
@@ -64,7 +64,7 @@ class HeaderAsm2 extends Component {
                             <div className="col-md-4 col-12">
                                 <div className="input-group mt-2">
                                     <input type="text" className="form-control" placeholder="Search..." ref={this.input} />
-                                    <Link to={this.searchAd()}>
+                                    <Link to='home/data/search'>
                                         <button className="btn bg-secondary" type="submit" onClick={() => { this.props.handleSearch(this.input.current.value) }}><i className="fa fa-search text-white"></i></button>
                                     </Link>
                                 </div>
