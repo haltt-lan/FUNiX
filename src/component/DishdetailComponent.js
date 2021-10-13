@@ -1,6 +1,7 @@
 import React from 'react';
 import dateFormat from 'dateformat';
-import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import {Link} from 'react-router-dom';
 
 
 
@@ -18,8 +19,8 @@ function RenderDish(props) {
 
 
 function RenderComment(props) {
-    const comment = props.dish.comments.map((dish, index) => {
-        console.log(dish.comment);
+    const comment = props.comments.map((dish, index) => {
+        console.log(props.comments);
         return (
             <div key={index} className="m-2">
                 <p>{dish.comment}</p>
@@ -33,12 +34,24 @@ const Dishdetail = (props) => {
         return (
             <div className="container">
                 <div className="row">
+                    <Breadcrumb>
+
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
+                    </div>
+                </div>
+
+                <div className="row">
                     <div className="col-12 col-md-5">
                         <RenderDish dish={props.dish} />
                     </div>
                     <div className="col-12 col-md-7">
                         <h4>Comments</h4>
-                        <RenderComment dish={props.dish} />
+                        <RenderComment comments={props.comments} />
                     </div>
                 </div>
             </div>
