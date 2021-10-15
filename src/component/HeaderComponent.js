@@ -7,7 +7,6 @@ import { NavLink } from 'react-router-dom';
 class Header extends Component {
     constructor(props) {
         super(props);
-        this.input = React.createRef();
         this.state = {
           isNavOpen: false,
           isModalOpen: false 
@@ -25,13 +24,13 @@ class Header extends Component {
           isModalOpen: !this.state.isModalOpen
         });
       }
-      handleLogin=(event)=> {
+      handleLogin=(event)=>{
         this.toggleModal();
-        console.log(this.input.current);
-        alert('A name was submitted: ' + this.input.current.value);
+        alert("Username: " + this.username.value + " Password: " + this.password.value
+            + " Remember: " + this.remember.checked);
         event.preventDefault();
-      }
-    
+
+    }
     render() {
         return(
             <div>
@@ -77,24 +76,22 @@ class Header extends Component {
                     <ModalBody>
                     <Form onSubmit={this.handleLogin}>
                             <FormGroup>
-                                <Label>Username</Label>
-                                <input type="text" 
-                                     ref={this.input}/>
+                                <Label htmlFor="username">Username</Label>
+                                <Input type="text" id="username" name="username"
+                                    innerRef={(input) => this.username = input} />
                             </FormGroup>
                             <FormGroup>
-                                <Label for="password">Password</Label>
+                                <Label htmlFor="password">Password</Label>
                                 <Input type="password" id="password" name="password"
-                                     />
+                                    innerRef={(input) => this.password = input}  />
                             </FormGroup>
                             <FormGroup check>
                                 <Label check>
                                     <Input type="checkbox" name="remember"
-                                    />
+                                    innerRef={(input) => this.remember = input}  />
                                     Remember me
                                 </Label>
                             </FormGroup>
-
-                                
                             <Button type="submit" value="submit" color="primary">Login</Button>
                         </Form>
                     </ModalBody>
