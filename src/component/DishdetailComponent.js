@@ -6,6 +6,7 @@ import {
 } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { Loading } from './LoadingComponent';
 
 
 
@@ -54,7 +55,7 @@ class CommentForm extends Component {
             show: !this.state.show
         })
     }
-
+    // lỗi này do khi e dùng thư viện của react redux form nó phải set mã kí tự v   ne,ne  vay em để nguyên khỏi sửa phải ko anh
     render() {
         return (
             <Fragment>
@@ -113,8 +114,25 @@ class CommentForm extends Component {
 }
 
 const Dishdetail = (props) => {
-    console.log('dishdetail', props)
-    if (props.dish != null) {
+    if (props.isLoading) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <Loading />
+                </div>
+            </div>
+        );
+    }
+    else if (props.errMess) {
+        return(
+            <div className="container">
+                <div className="row">            
+                    <h4>{props.errMess}</h4>
+                </div>
+            </div>
+        );
+    }
+    else if (props.dish != null){
         return (
             <div className="container">
                 <div className="row">
