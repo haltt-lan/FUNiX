@@ -7,13 +7,15 @@ import {
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
+import { baseUrl } from '../shared/baseUrl';
 
 
 
 function RenderDish(props) {
+    console.log('renderDish: ',props)
     return (
         <Card>
-            <CardImg top src={props.dish.image} alt={props.dish.name} />
+            <CardImg top src={baseUrl+props.dish.image} alt={props.dish.name} />
             <CardBody>
                 <CardTitle>{props.dish.name}</CardTitle>
                 <CardText>{props.dish.description}</CardText>
@@ -23,7 +25,8 @@ function RenderDish(props) {
 }
 
 
-function RenderComment({ comments }) {
+function RenderComment({ comments, commentsErrMess }) {
+    console.log('renderComments:',comments);
     const comment = comments.map((dish, index) => {
         return (
             <div key={index} className="m-2">
@@ -31,6 +34,10 @@ function RenderComment({ comments }) {
                 <p>--{dish.author}, {dateFormat(dish.date, 'dd/mm/yyyy')}</p>
             </div>)
     })
+    if (commentsErrMess){
+        return (<h4>{commentsErrMess}</h4>)
+    }
+    else
     return comment;
 }
 
