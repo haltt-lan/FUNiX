@@ -8,12 +8,18 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import {FadeTransform, Fade, Stagger} from 'react-animation-components';
 
 
 
 function RenderDish(props) {
     console.log('renderDish: ',props)
     return (
+        <FadeTransform
+                in
+                transformProps={{
+                    exitTransform: 'scale(0.5) translateY(-50%)'
+                }}>
         <Card>
             <CardImg top src={baseUrl+props.dish.image} alt={props.dish.name} />
             <CardBody>
@@ -21,6 +27,7 @@ function RenderDish(props) {
                 <CardText>{props.dish.description}</CardText>
             </CardBody>
         </Card>
+        </FadeTransform>
     );
 }
 
@@ -29,16 +36,21 @@ function RenderComment({ comments, commentsErrMess }) {
     console.log('renderComments:',comments);
     const comment = comments.map((dish, index) => {
         return (
+            <Fade in>
             <div key={index} className="m-2">
                 <p>{dish.comment}</p>
                 <p>--{dish.author}, {dateFormat(dish.date, 'dd/mm/yyyy')}</p>
-            </div>)
+            </div>
+            </Fade>
+            )
     })
+
     if (commentsErrMess){
         return (<h4>{commentsErrMess}</h4>)
     }
     else
     return comment;
+ 
 }
 
 const required = (val) => val && val.length;
