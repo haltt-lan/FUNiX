@@ -3,11 +3,13 @@ import { combineReducers } from "redux";
 import {Staffs} from './staffs';
 import { Departments } from "./departments";
 import { StaffSalary } from "./staffSalary";
+import { DetailDep } from "./detailDep";
 
 
 
  export const rootReducer = combineReducers  ({
      list: Staffs,
      departments: Departments,
-     staffSalary: StaffSalary
+     staffSalary: StaffSalary,
+     detailDep: DetailDep
  })
