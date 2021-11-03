@@ -86,7 +86,7 @@ const mapDispatchToProps = dispatch => ({
   fetchList: () => { dispatch(fetchList()) },
   fetchDepartments: () => { dispatch(fetchDepartments()) },
   fetchStaffSalary: () => { dispatch(fetchStaffSalary()) },
-  fetchDetaiDep: () => { dispatch(fetchDetaiDep()) },
+  fetchDetaiDep: (id) => { dispatch(fetchDetaiDep(id)) },
 
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App)

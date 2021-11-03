@@ -1,81 +1,111 @@
-import React, { Fragment } from 'react';
+import React, { Component, Fragment } from 'react';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Card, CardTitle, CardText } from 'reactstrap';
 import Header from './Header';
 import { Loading } from './Loading';
+import {fetchDetaiDep } from '../reducer/ActionCreators';
+import { connect } from 'react-redux';
 
-function RenderList({ departments, isLoading, errMess }) {
 
-    // console.log('detailDepErr',detailDepErr)
-    // return (
-    //     <table className="table-bordered text-center mx-auto bg-light" style={{ width: '50%' }}>
-    //         <RenderDetailList detailDep={detailDep} detailDepErr={detailDepErr} />
-    //     </table>
-    // )
-
-    if (isLoading) {
-        return (
-            <Loading />
-        );
+class PhongBan extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            show: false,
+            id:0
+        }
     }
-    else if (errMess) {
-        return (
-            <h4>{errMess}</h4>
-        );
-    }
-    else
-        return (departments.map((item, index) => {
+    componentDidMount() {
+        this.props.fetchDetaiDep();
+       
+      }
+    renderList = () => {
+        if (this.props.depLoading) {
             return (
-                <div className='col-lg-4 col-md-6 col-12'>
-                    <Card body outline color="secondary" onClick={() => detailList(item.id)}>
-                        <CardTitle tag="h5" style={{ textAlign: 'center' }}>{item.name}</CardTitle>
-                        <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
-                    </Card>
-                    <br />
-                </div>
+                <Loading />
+            );
+        }
+        else if (this.props.depErrMess) {
+            return (
+                <h4>{this.props.depErrMess}</h4>
+            );
+        }
+        else
+            return (
+                this.props.departments.map((item, index) => {
+                    return (
+                        <div className='col-lg-4 col-md-6 col-12'>
+                            <Card body outline color="secondary" onClick={() => this.showDetail(item.departmentId)}>
+                                <CardTitle tag="h5" style={{ textAlign: 'center' }}>{item.name}</CardTitle>
+                                <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
+                            </Card>
+                            <br />
+                        </div>
+                    )
+                })
             )
-        }))
+    }
+    showDetail = (id) => {
+        this.setState({
+            show: true,
+            id: id
+        })
+    }
 
-}
-const detailList = (id) => {
-    console.log('iddd', id);
+    renderDetailList = () => {
+        if (this.state.show) {
+            if (this.props.detailDepLoading) {
+                return (
+                    <Loading />
+                );
+            }
+            else if (this.props.detailDepErr) {
+                return (
+                    <h4>{this.props.detailDepErr}</h4>
+                );
+            }
+            else {
+                return (
+                    <Fragment>
+                        <table className="table-bordered text-center mx-auto bg-light" style={{ width: '50%' }}>
+                            <tr>
+                                <h5 className="text-info"> Danh sách nhân viên phòng</h5>
+                            </tr>
+                            {this.props.detailDep.map((y, index) => {
+                                return (
+                                    <tr key={index} className="text-center">
+                                        {index + 1}.{y.name}
+                                    </tr >)
+                            })}
+                        </table>
+                    </Fragment>
+                )
+            }
+        } else { }
 
-}
+    }
+    render() {
+        return (
 
-// function RenderDetailList({ detailDepLoading, detailDep, detailDepErr }) {
-//     console.log('detailDep', detailDep)
-//     if (detailDepLoading) {
-//         return (
-//             <Loading />
-//         );
-//     } else if (detailDepErr) {
-//         return (<h4>{detailDepErr}</h4>)
-//     } else
-//         return (
-//             <div>
-//                 <h1>test</h1>
-//             </div>
-//         )
-
-// }
-
-
-
-function PhongBan(props) {
-    return (
-        <Fragment>
-            <Header handleSearch={props.handleSearch} />
-            <div className="container mt-3">
-                <div className="row">
-                    <RenderList departments={props.departments} isLoading={props.depLoading} errMess={props.depErrMess} />
+            <Fragment>
+                <Header handleSearch={this.props.handleSearch} />
+                <div className="container mt-3">
+                    <div className="row">
+                        {this.renderList()}
+                    </div>
+                    <div>
+                        {this.renderDetailList()}
+                    </div>
                 </div>
-                <div>
-                </div>
+            </Fragment>
 
-            </div>
-        </Fragment>
-    )
+        )
+    }
 }
+const mapDispatchToProps = dispatch => ({
+    fetchDetaiDep: () => { dispatch(fetchDetaiDep(this.state.id)) },
+  })
+
+export default connect(null, mapDispatchToProps)(PhongBan)
 
 
-export default PhongBan;

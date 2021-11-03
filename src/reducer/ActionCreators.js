@@ -104,9 +104,9 @@ export const addStaffSalary = (staffsalary) => ({
 });
 
 //Lấy dữ liệu chi tiết nhân viên theo phòng ban
-export const fetchDetaiDep =()=> (dispatch) => {
+export const fetchDetaiDep =(id)=> (dispatch) => {
     dispatch (detailDepLoading(true));
-    return fetch(baseUrl+'departments/Dep01')
+    return fetch(baseUrl+'departments/'+id)
 
     .then (response => {
         console.log('haaaa',response)
