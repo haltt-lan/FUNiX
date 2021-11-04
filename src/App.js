@@ -22,8 +22,6 @@ class App extends Component {
     this.props.fetchList();
     this.props.fetchDepartments();
     this.props.fetchStaffSalary();
-    this.props.fetchDetaiDep();
-   
   }
   handleSearch = (keyword) => {
     console.log(keyword);
