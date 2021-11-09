@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, Row, Col, Label } from 'reactstrap';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import { connect } from 'react-redux';
+import { postStaff } from '../reducer/ActionCreators';
 
 
 
@@ -23,7 +24,8 @@ class ModalThemMoi extends Component {
     renderThemMoi = () => this.setState({ show: !this.state.show })
 
     submitThemMoi = (values) => {
-        this.props.addStaff(values)
+        console.log('values',values);
+        this.props.postStaff(this.props.list.length, values.name, values.doB, values.startDate, values.department,values.salaryScale, values.annualLeave, values.overTime )
     }
     render() {
         return (
@@ -78,11 +80,11 @@ class ModalThemMoi extends Component {
                                             required
                                         }}>
                                         <option value=''></option>
-                                        <option value="Sale">Sale</option>
-                                        <option value="HR">HR</option>
-                                        <option value="Marketing">Marketing</option>
-                                        <option value="IT">IT</option>
-                                        <option value="Finance">Finance</option>
+                                        <option value="Dept01">Sale</option>
+                                        <option value="Dept02">HR</option>
+                                        <option value="Dept03">Marketing</option>
+                                        <option value="Dept04">IT</option>
+                                        <option value="Dept05">Finance</option>
                                     </Control.select>
                                     <Errors className="text-danger" model=".department" show="touched" messages={{
                                         required: "bắt buộc"
@@ -137,16 +139,7 @@ class ModalThemMoi extends Component {
         )
     }
 }
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addStaff: (values) => {
-           
-            const action = {
-                type: 'ADD_STAFF',
-                values
-            }
-            dispatch(action)
-        }
-    }
-}
+const mapDispatchToProps = (dispatch) => ({
+    postStaff:(id, name, doB, startDate, department,salaryScale,annualLeave,overTime)=>{dispatch(postStaff(id, name, doB, startDate, department,salaryScale,annualLeave,overTime))},
+})
 export default connect(null, mapDispatchToProps)(ModalThemMoi)

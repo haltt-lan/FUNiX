@@ -9,7 +9,7 @@ class DetailDep extends Component {
             <Fragment>
                 <table className="table-bordered text-center mx-auto bg-light" style={{ width: '50%' }}>
                     <tr>
-                        <h5 className="text-info"> Danh sách nhân viên phòng</h5>
+                        <h5 className="text-info"> Danh sách nhân viên phòng {this.props.dep}</h5>
                     </tr>
                     {this.props.detailDep.map((y, index) => {
                         return (

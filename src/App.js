@@ -42,9 +42,6 @@ class App extends Component {
         <BrowserRouter>
           <Switch>
             <Route exact path='/home' component={() => <ListStaff handleSearch={this.handleSearch} 
-                                                                  list={this.props.list.list} 
-                                                                  listLoading={this.props.list.isLoading} 
-                                                                  listErrMess={this.props.list.errMess} 
                                                                   />} />
             <Route exact path='/home/data/search' component={() => <SearchListStaff handleSearch={this.handleSearch} 
                                                                                 arrSearch={this.state.arrSearch} />} />
@@ -54,9 +51,9 @@ class App extends Component {
                                                               depLoading={this.props.departments.isLoading}
                                                               depErrMess={this.props.departments.errMess}
                                                               list={this.props.list.list}
-                                                              detailDepLoading={this.props.detailDep.detailDepLoading}
-                                                              detailDep={this.props.detailDep.detailDep}
-                                                              detailDepErr={this.props.detailDep.detailDepErr}
+                                                              // detailDepLoading={this.props.detailDep.detailDepLoading}
+                                                              // detailDep={this.props.detailDep.detailDep}
+                                                              // detailDepErr={this.props.detailDep.detailDepErr}
                                                                 />} />
             <Route exact path='/bangluong' component={() => <BangLuong handleSearch={this.handleSearch} 
                                                                         staffSalary={this.props.staffSalary.staffSalary} 
@@ -77,7 +74,7 @@ const mapStateToProps = (state) => {
     list: state.list,
     departments: state.departments,
     staffSalary: state.staffSalary,
-    detailDep:state.detailDep
+    // detailDep:state.detailDep
   }
 }
 const mapDispatchToProps = dispatch => ({

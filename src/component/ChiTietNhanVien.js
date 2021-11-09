@@ -26,6 +26,7 @@ const dep=props.departments.find(x=>x.id===props.item.departmentId);
                         <p>Phòng ban : {dep.name}</p>
                         <p>Số ngày nghỉ còn lại : {item.annualLeave}</p>
                         <p>Số ngày đã làm thêm : {item.overTime}</p>
+                        <button className="btn btn-success mb-2"> Chỉnh sửa</button>
                     </div>
                 </div>
             </div>

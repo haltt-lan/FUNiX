@@ -1,4 +1,51 @@
 import { baseUrl } from "./baseUrl";
+//Thêm nhân viên
+
+export const addStaff = (info) => ({
+    type: "ADD_STAFF",
+    payload: info
+});    
+ export const postStaff = (id, name, doB, startDate, department,salaryScale,annualLeave,overTime)=> dispatch => {
+    const basicSalary = 3000000;
+    const overTimeSalary = 200000;
+     const newStaff = {
+        id:id+1,
+        name: name,
+        doB:doB,
+        salaryScale:salaryScale,
+        startDate:startDate,
+        departmentId:department,
+        annualLeave:annualLeave,
+        overTime:overTime,
+        image:"/asset/images/alberto.png",
+        salary:(salaryScale * basicSalary) + (overTime * overTimeSalary)
+     };
+     return fetch(baseUrl+'staffs',{
+         method: "POST",
+         body: JSON.stringify(newStaff),
+         headers: {
+            "Content-Type": "application/json"
+        },
+        credentials: "same-origin"
+     })
+     .then(response => {
+         if(response.ok){
+             return response
+         } else {
+             var error =  new Error ('Error' + response.status + ':' +response.statusText);
+             error.response = response;
+             throw error;
+         }
+        },
+        error => {
+            throw error;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(addStaff(response)))
+        .catch(error => { console.log('post staff', error.message); 
+     });
+     };
+ 
 
 //Lấy dữ liệu Tab Nhân viên
 export const fetchList =()=> (dispatch) => {
@@ -32,6 +79,35 @@ export const listFailed = (errMess) => ({
 export const addList = (list) => ({
     type: "ADD_LIST",
     payload: list
+});
+
+
+//Xóa nhân viên
+export const deleteStaff =(id) => dispatch =>{
+
+    return fetch(baseUrl+'staffs')
+
+    .then (response => {
+        if(response.ok){ return response}
+        else {
+            var error = new Error('Error ' + response.status + ':' + response.statusText);
+            error.response = response;
+            console.log(error);
+            throw error;
+        }},
+    error => {
+        var errMess = new Error (error.message);
+        throw errMess;
+    }
+    )
+    .then (response => response.json())
+    .then (response => dispatch (delStaff(response)))
+    .catch (response => dispatch(listFailed(response.message)));
+
+}
+export const delStaff = (id) => ({
+    type: "DELETE_STAFF",
+    payload: id
 });
 
 //Lấy dữ liệu Tab Phòng Ban
@@ -109,7 +185,7 @@ export const fetchDetaiDep =(id)=> (dispatch) => {
     return fetch(baseUrl+'departments/'+id)
 
     .then (response => {
-        console.log('haaaa',response)
+        // console.log('haaaa',response)
         if(response.ok){ return response}
         else {
             var error = new Error('Error ' + response.status + ':' + response.statusText);
