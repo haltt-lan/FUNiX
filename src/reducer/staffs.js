@@ -5,6 +5,7 @@ var findIndex = (state, id) => {
         if (staff.id === id) {
             result = index
         }
+        console.log('result:', result);
     });
     return result;
 }
@@ -20,10 +21,17 @@ export const Staffs = (state = {
             var staff = action.payload;
             return { ...state, list: state.list.concat(staff) }
         case "DELETE_STAFF":
-            var index = findIndex(state,action.payload);
-            console.log('id',action.payload);
-            state.splice(index, 1);
-            return {...state}
+            var id = action.payload;
+            var index = findIndex(state, id);
+            console.log('id', id);
+            state.list.splice(index, 1);
+            return { ...state }
+        case "EDIT_STAFF":
+            var idEdit = action.payload.id;
+            var indexEdit = findIndex(state, idEdit);
+            var newStaff = action.payload;
+            state.list.splice(indexEdit, 1, newStaff)
+            return { ...state }
         case "ADD_LIST":
             return { ...state, isLoading: false, errMess: null, list: action.payload }
         case "LIST_LOADING":

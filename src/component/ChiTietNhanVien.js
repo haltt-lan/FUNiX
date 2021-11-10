@@ -3,13 +3,14 @@ import dateFormat from 'dateformat';
 import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import Header from './Header';
+import ModalChinhSua from './ModalChinhSua';
 
 function ChiTietNhanVien(props) {
-const dep=props.departments.find(x=>x.id===props.item.departmentId);
+    const dep = props.departments.find(x => x.id === props.item.departmentId);
     const { item } = props;
     return item ? (
         <Fragment>
-           <Header handleSearch={props.handleSearch}/>
+            <Header handleSearch={props.handleSearch} />
             <div className="container">
                 <Breadcrumb>
                     <BreadcrumbItem><Link to='/home' className='text-decoration-none'>Nhân viên</Link></BreadcrumbItem>
@@ -26,7 +27,8 @@ const dep=props.departments.find(x=>x.id===props.item.departmentId);
                         <p>Phòng ban : {dep.name}</p>
                         <p>Số ngày nghỉ còn lại : {item.annualLeave}</p>
                         <p>Số ngày đã làm thêm : {item.overTime}</p>
-                        <button className="btn btn-success mb-2"> Chỉnh sửa</button>
+                        <ModalChinhSua id={item.id} 
+                        />
                     </div>
                 </div>
             </div>
