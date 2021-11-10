@@ -111,7 +111,7 @@ export const deleteStaff =(id) => dispatch =>{
     )
     .then (response => response.json())
     .then (response => dispatch (delStaff(response)))
-    .catch (response => dispatch(listFailed(response.message)));
+    .catch(error => { console.log('delete staff', error.message)}); 
 
 }
 
