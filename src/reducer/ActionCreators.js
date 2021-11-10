@@ -83,13 +83,13 @@ export const addList = (list) => ({
 
 
 //Xóa nhân viên
+export const delStaff = (id) => ({
+    type: "DELETE_STAFF",
+    payload: id
+}); 
 export const deleteStaff =(id) => dispatch =>{
-  const delStaff ={
-      id: id
-  }
-    return fetch(baseUrl+'staffs/'+{id},{
+    return fetch(baseUrl+'staffs/'+id,{
         method: "DELETE",
-        body: JSON.stringify(delStaff),
         headers: {
            "Content-Type": "application/json"
        },
@@ -110,7 +110,7 @@ export const deleteStaff =(id) => dispatch =>{
     }
     )
     .then (response => response.json())
-    .then (response => dispatch (delStaff(response)))
+    .then (response => dispatch (delStaff(id)))
     .catch(error => { console.log('delete staff', error.message)}); 
 
 }

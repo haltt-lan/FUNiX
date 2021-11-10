@@ -20,9 +20,8 @@ export const Staffs = (state = {
             var staff = action.payload;
             return { ...state, list: state.list.concat(staff) }
         case "DELETE_STAFF":
-            console.log('delete_staff', action.payload);
-            var index = findIndex(state,action.payload.id);
-            console.log('id',action.payload.id)
+            var index = findIndex(state,action.payload);
+            console.log('id',action.payload);
             state.splice(index, 1);
             return {...state}
         case "ADD_LIST":
