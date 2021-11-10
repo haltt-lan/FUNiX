@@ -1,6 +1,6 @@
 
 var findIndex = (state, id) => {
-    var result = -1;
+    var result;
     state.list.forEach((staff, index) => {
         if (staff.id === id) {
             result = index
@@ -20,8 +20,9 @@ export const Staffs = (state = {
             var staff = action.payload;
             return { ...state, list: state.list.concat(staff) }
         case "DELETE_STAFF":
-            var index = findIndex(state,action.id);
-            console.log('id', action.id)
+            console.log('delete_staff', action.payload);
+            var index = findIndex(state,action.payload.id);
+            console.log('id',action.payload.id)
             state.splice(index, 1);
             return {...state}
         case "ADD_LIST":

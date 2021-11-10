@@ -84,8 +84,17 @@ export const addList = (list) => ({
 
 //Xóa nhân viên
 export const deleteStaff =(id) => dispatch =>{
-
-    return fetch(baseUrl+'staffs')
+  const delStaff ={
+      id: id
+  }
+    return fetch(baseUrl+'staffs/'+{id},{
+        method: "DELETE",
+        body: JSON.stringify(delStaff),
+        headers: {
+           "Content-Type": "application/json"
+       },
+       credentials: "same-origin"
+    })
 
     .then (response => {
         if(response.ok){ return response}
@@ -105,10 +114,6 @@ export const deleteStaff =(id) => dispatch =>{
     .catch (response => dispatch(listFailed(response.message)));
 
 }
-export const delStaff = (id) => ({
-    type: "DELETE_STAFF",
-    payload: id
-});
 
 //Lấy dữ liệu Tab Phòng Ban
 export const fetchDepartments =()=> (dispatch) => {
