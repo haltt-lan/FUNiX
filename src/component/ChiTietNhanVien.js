@@ -28,6 +28,12 @@ function ChiTietNhanVien(props) {
                         <p>Số ngày nghỉ còn lại : {item.annualLeave}</p>
                         <p>Số ngày đã làm thêm : {item.overTime}</p>
                         <ModalChinhSua id={item.id} 
+                        name={item.name}
+                        doB={item.doB}
+                        startDate={item.startDate}
+                        department={dep.name}
+                        annualLeave={item.annualLeave}
+                        overTime={item.overTime}
                         />
                     </div>
                 </div>

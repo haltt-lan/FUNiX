@@ -27,6 +27,7 @@ export const Staffs = (state = {
             state.list.splice(index, 1);
             return { ...state }
         case "EDIT_STAFF":
+            console.log('payload:',action.payload);
             var idEdit = action.payload.id;
             var indexEdit = findIndex(state, idEdit);
             var newStaff = action.payload;

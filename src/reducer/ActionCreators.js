@@ -121,6 +121,7 @@ export const deleteStaff = (id) => dispatch => {
 export const editStaff = (newInfo) => ({
     type: "EDIT_STAFF",
     payload: newInfo
+
 });
 export const patchStaff = (newInfo) => dispatch => {
     const basicSalary = 3000000;

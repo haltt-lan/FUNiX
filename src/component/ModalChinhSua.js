@@ -18,26 +18,16 @@ class ModalEdit extends Component {
         super(props);
         this.state = {
             show: false,
-            // newInfo: {
-            //     id:id,
-            //     name:this.props.name,
-            //     doB:this.props.doB,
-            //     startDate:this.props.startDate,
-            //     department: this.props.department,
-            //     salaryScale:this.props.salaryScale,
-            //     annualLeave:this.props.annualLeave,
-            //     overTime: this.props.overTime
-            // },
             newInfo: {
                 id:this.props.id,
-                name:'',
-                doB:'',
-                startDate:'',
-                department: '',
-                salaryScale:'',
-                annualLeave:'',
-                overTime: ''
-            },
+                name:this.props.name,
+                doB:this.props.doB,
+                startDate:this.props.startDate,
+                department: this.props.department,
+                salaryScale:this.props.salaryScale,
+                annualLeave:this.props.annualLeave,
+                overTime: this.props.overTime
+            }
         }
     }
     renderEdit = () => this.setState({ show: !this.state.show })
@@ -46,7 +36,6 @@ class ModalEdit extends Component {
         console.log('values',values);
         this.setState({
             newInfo:{
-                id:this.props.id,
                 name:values.name,
                 doB:values.doB,
                 startDate: values.startDate,
@@ -55,13 +44,13 @@ class ModalEdit extends Component {
                 annualLeave:values.annualLeave,
                 overTime: values.overTime
             }
+        },()=>{
+            console.log('new',this.state.newInfo);
+            this.props.patchStaff(this.state.newInfo);
         })
-        this.props.patchStaff(this.state.newInfo);
+        
     }
     render() {
-        console.log('chinh sua:',this.props.id);
-        console.log('startdate:',this.props.startDate);
-        console.log('doB:',this.props.doB);
         return (
             <Fragment>
                 <Button color="success" onClick={this.renderEdit}><i class="fa fa-pencil-square-o" aria-hidden="true"> Chỉnh sửa</i></Button>
