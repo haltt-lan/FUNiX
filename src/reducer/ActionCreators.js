@@ -41,7 +41,7 @@ export const postStaff = (id, name, doB, startDate, department, salaryScale, ann
                 throw error;
             })
         .then(response => response.json())
-        .then(response => dispatch(addStaff(newStaff)))
+        .then(() => dispatch(addStaff(newStaff)))
         .catch(error => {
             console.log('post staff', error.message);
         });

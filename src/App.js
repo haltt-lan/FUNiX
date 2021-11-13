@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import ListStaff from './component/ListStaff';
 import ChiTietNhanVien from './component/ChiTietNhanVien';
 import Footer from './component/Footer';
@@ -9,7 +9,8 @@ import SearchListStaff from './component/SearchListStaff';
 import SearchBangLuong from './component/SearchBangLuong';
 import { connect } from 'react-redux';
 import { fetchList, fetchDepartments, fetchStaffSalary, fetchDetaiDep } from './reducer/ActionCreators';
-import dateFormat from 'dateformat';
+import './App.css';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 
 class App extends Component {
@@ -37,33 +38,37 @@ class App extends Component {
       const staff = this.props.list.list.find(x => x.id === parseInt(match.params.id))
       return <ChiTietNhanVien item={staff} handleSearch={this.handleSearch} departments={this.props.departments.departments} />
     }
-
+    console.log('location',this.props.location);
     return (
       <div>
         <BrowserRouter>
-          <Switch>
-            <Route exact path='/home' component={() => <ListStaff handleSearch={this.handleSearch} 
-                                                                  />} />
-            <Route exact path='/home/data/search' component={() => <SearchListStaff handleSearch={this.handleSearch} 
-                                                                                arrSearch={this.state.arrSearch} />} />
-            <Route exact path='/home/:id' component={StaffWithId} />
-            <Route path='/phongban' component={() => <PhongBan handleSearch={this.handleSearch}
-                                                              departments={this.props.departments.departments}
-                                                              depLoading={this.props.departments.isLoading}
-                                                              depErrMess={this.props.departments.errMess}
-                                                              list={this.props.list.list}
-                                                              // detailDepLoading={this.props.detailDep.detailDepLoading}
-                                                              // detailDep={this.props.detailDep.detailDep}
-                                                              // detailDepErr={this.props.detailDep.detailDepErr}
-                                                                />} />
-            <Route exact path='/bangluong' component={() => <BangLuong handleSearch={this.handleSearch} 
-                                                                        staffSalary={this.props.staffSalary.staffSalary} 
-                                                                        staffSalaryLoading={this.props.staffSalary.isLoading} 
-                                                                        staffSalaryErrMess={this.props.staffSalary.errMess} />} />
-            <Route exact path='/bangluong/search' component={() => <SearchBangLuong handleSearch={this.handleSearch} 
-                                                                                    arrSearch={this.state.arrSearch} />} />
-            <Redirect to='/home' />
-          </Switch>
+          <TransitionGroup>
+            <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+              <Switch>
+                <Route exact path='/home' component={() => <ListStaff handleSearch={this.handleSearch}
+                />} />
+                <Route exact path='/home/data/search' component={() => <SearchListStaff handleSearch={this.handleSearch}
+                  arrSearch={this.state.arrSearch} />} />
+                <Route exact path='/home/:id' component={StaffWithId} />
+                <Route path='/phongban' component={() => <PhongBan handleSearch={this.handleSearch}
+                  departments={this.props.departments.departments}
+                  depLoading={this.props.departments.isLoading}
+                  depErrMess={this.props.departments.errMess}
+                  list={this.props.list.list}
+                // detailDepLoading={this.props.detailDep.detailDepLoading}
+                // detailDep={this.props.detailDep.detailDep}
+                // detailDepErr={this.props.detailDep.detailDepErr}
+                />} />
+                <Route exact path='/bangluong' component={() => <BangLuong handleSearch={this.handleSearch}
+                  staffSalary={this.props.staffSalary.staffSalary}
+                  staffSalaryLoading={this.props.staffSalary.isLoading}
+                  staffSalaryErrMess={this.props.staffSalary.errMess} />} />
+                <Route exact path='/bangluong/search' component={() => <SearchBangLuong handleSearch={this.handleSearch}
+                  arrSearch={this.state.arrSearch} />} />
+                <Redirect to='/home' />
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
           <Footer />
         </BrowserRouter>
       </div>
@@ -85,4 +90,4 @@ const mapDispatchToProps = dispatch => ({
   fetchDetaiDep: (id) => { dispatch(fetchDetaiDep(id)) },
 
 })
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
