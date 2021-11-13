@@ -24,8 +24,8 @@ class ModalThemMoi extends Component {
     renderThemMoi = () => this.setState({ show: !this.state.show })
 
     submitThemMoi = (values) => {
-        console.log('values',values);
-        this.props.postStaff(this.props.list.length, values.name, values.doB, values.startDate, values.department,values.salaryScale, values.annualLeave, values.overTime )
+        console.log('submitThemMoi',this.props);
+        this.props.postStaff(this.props.list.list.length, values.name, values.doB, values.startDate, values.department,values.salaryScale, values.annualLeave, values.overTime )
     }
     render() {
         return (

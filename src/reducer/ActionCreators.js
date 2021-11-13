@@ -9,7 +9,7 @@ export const postStaff = (id, name, doB, startDate, department, salaryScale, ann
     const basicSalary = 3000000;
     const overTimeSalary = 200000;
     const newStaff = {
-        id: id + 1,
+        id: id,
         name: name,
         doB: doB,
         salaryScale: salaryScale,
@@ -41,7 +41,7 @@ export const postStaff = (id, name, doB, startDate, department, salaryScale, ann
                 throw error;
             })
         .then(response => response.json())
-        .then(response => dispatch(addStaff(response)))
+        .then(response => dispatch(addStaff(newStaff)))
         .catch(error => {
             console.log('post staff', error.message);
         });

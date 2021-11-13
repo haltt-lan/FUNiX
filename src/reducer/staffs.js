@@ -19,13 +19,14 @@ export const Staffs = (state = {
     switch (action.type) {
         case "ADD_STAFF":
             var staff = action.payload;
-            return { ...state, list: state.list.concat(staff) }
+            console.log('add',state.list.concat(staff));
+            return { ...state,list:state.list.concat(staff)}
         case "DELETE_STAFF":
             var id = action.payload;
             var index = findIndex(state, id);
             console.log('id', id);
             state.list.splice(index, 1);
-            return { ...state }
+            return {...state }
         case "EDIT_STAFF":
             console.log('payload:',action.payload);
             var idEdit = action.payload.id;

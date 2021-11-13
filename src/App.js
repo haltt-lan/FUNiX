@@ -9,6 +9,7 @@ import SearchListStaff from './component/SearchListStaff';
 import SearchBangLuong from './component/SearchBangLuong';
 import { connect } from 'react-redux';
 import { fetchList, fetchDepartments, fetchStaffSalary, fetchDetaiDep } from './reducer/ActionCreators';
+import dateFormat from 'dateformat';
 
 
 class App extends Component {
