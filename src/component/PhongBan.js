@@ -6,6 +6,7 @@ import { Loading } from './Loading';
 import DetailDep from './DetailDep';
 import { fetchDetaiDep } from '../reducer/ActionCreators';
 import { connect } from 'react-redux';
+import { FadeTransform } from 'react-animation-components';
 
 
 class PhongBan extends Component {
@@ -29,17 +30,26 @@ class PhongBan extends Component {
         }
         else
             return (
+                
                 this.props.departments.map((item, index) => {
                     return (
+                        
                         <div className='col-lg-4 col-md-6 col-12'>
+                             <FadeTransform in transformProps={{exitTransform: 'translateY(20px)'}}
+                                        fadeProps={{enterOpacity: 0.85}}>
                             <Card body outline color="secondary" onClick={() => this.showDetail(item.id,item.name)}>
                                 <CardTitle tag="h5" style={{ textAlign: 'center' }}>{item.name}</CardTitle>
                                 <CardText>Số lượng nhân viên: {item.numberOfStaff}</CardText>
                             </Card>
+                            </FadeTransform>
+                           
                             <br />
+                           
                         </div>
+                    
                     )
                 })
+              
             )
     }
     showDetail = (id,name) => {

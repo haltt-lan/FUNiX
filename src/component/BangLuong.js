@@ -4,6 +4,7 @@ import { Link} from 'react-router-dom';
 import Header from './Header';
 import {withRouter} from 'react-router-dom';
 import { Loading } from './Loading';
+import { FadeTransform} from 'react-animation-components';
 
 
 class BangLuong extends Component {
@@ -58,6 +59,8 @@ class BangLuong extends Component {
        
             return (
                 <div className='col-lg-4 col-md-6 col-12'>
+                    <FadeTransform in transformProps={{exitTransform: 'translateX(-100px)'}}
+                                        fadeProps={{enterOpacity: 0.85}}>
                     <Link to={`/home/${item.id}`} style={{ textDecoration: 'none' }} className="text-dark">
                         <Card key={index}>
                             <CardBody>
@@ -71,6 +74,7 @@ class BangLuong extends Component {
                             <CardFooter>Lương = {(item.salary).toLocaleString()}</CardFooter>
                         </Card>
                     </Link>
+                    </FadeTransform>
                     <br />
                 </div>
             )

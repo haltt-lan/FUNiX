@@ -11,6 +11,7 @@ import { applyMiddleware, createStore } from 'redux';
 import { rootReducer } from './reducer/rootReducer';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import { BrowserRouter} from 'react-router-dom';
 
 //tạo ra storr tổng của ứng dụng
 const store = createStore(rootReducer,
@@ -19,7 +20,9 @@ const store = createStore(rootReducer,
 
 ReactDOM.render(
   <Provider store={store}>
+    <BrowserRouter>
     <App />
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 );

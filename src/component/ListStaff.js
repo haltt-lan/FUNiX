@@ -6,6 +6,7 @@ import ModalThemMoi from './ModalThemMoi';
 import { Loading } from './Loading';
 import {deleteStaff } from '../reducer/ActionCreators';
 import { connect } from 'react-redux';
+import { FadeTransform } from 'react-animation-components';
 
 
 class ListStaff extends Component {
@@ -24,6 +25,7 @@ renderList = () => {
         return this.props.list.list.sort((a, b) => a.id - b.id).map((item, index) => {
             return (
                 <div className='col-lg-2 col-md-4 col-6 '>
+                    <FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-20%)'}}>
                     <Card key={index}>
                         <Link style={{ textDecoration: 'none' }} className="text-dark" to={`/home/${item.id}`} >
                             <CardImg top width='100%' src={item.image} alt='Card image cap' />
@@ -32,6 +34,7 @@ renderList = () => {
                             <CardTitle tag='h5' style={{ textAlign: 'center' }}>{item.name}<button className="btn btn-danger" onClick={() => this.onDelete(item.id)}>Detete</button></CardTitle>
                         </CardBody>
                     </Card>
+                    </FadeTransform>
                     <br />
 
                 </div >

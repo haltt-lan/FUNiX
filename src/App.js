@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import {Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import ListStaff from './component/ListStaff';
 import ChiTietNhanVien from './component/ChiTietNhanVien';
 import Footer from './component/Footer';
@@ -41,9 +41,8 @@ class App extends Component {
     console.log('location',this.props.location);
     return (
       <div>
-        <BrowserRouter>
-          <TransitionGroup>
-            <CSSTransition key={this.props.location.key} classNames="page" timeout={300}>
+          {/* <TransitionGroup>
+            <CSSTransition key={this.props.location.key} classNames="page" timeout={300}> */}
               <Switch>
                 <Route exact path='/home' component={() => <ListStaff handleSearch={this.handleSearch}
                 />} />
@@ -67,10 +66,9 @@ class App extends Component {
                   arrSearch={this.state.arrSearch} />} />
                 <Redirect to='/home' />
               </Switch>
-            </CSSTransition>
-          </TransitionGroup>
+            {/* </CSSTransition>
+          </TransitionGroup> */}
           <Footer />
-        </BrowserRouter>
       </div>
     )
   }
