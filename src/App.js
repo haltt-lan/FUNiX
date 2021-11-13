@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 import ListStaff from './component/ListStaff';
 import ChiTietNhanVien from './component/ChiTietNhanVien';
 import Footer from './component/Footer';
@@ -32,43 +32,44 @@ class App extends Component {
       arrSearch: arrSearchNew
     })
   }
+  StaffWithId = ({ match }) => {
+    const idStaff=parseInt(match.params.id);
+    console.log('parseInt',idStaff);
+    return <ChiTietNhanVien idStaff={idStaff} handleSearch={this.handleSearch} />
+  }
 
   render() {
-    const StaffWithId = ({ match }) => {
-      const staff = this.props.list.list.find(x => x.id === parseInt(match.params.id))
-      return <ChiTietNhanVien item={staff} handleSearch={this.handleSearch} departments={this.props.departments.departments} />
-    }
-    console.log('location',this.props.location);
+    console.log('location', this.props.location);
     return (
       <div>
-          {/* <TransitionGroup>
+        {/* <TransitionGroup>
             <CSSTransition key={this.props.location.key} classNames="page" timeout={300}> */}
-              <Switch>
-                <Route exact path='/home' component={() => <ListStaff handleSearch={this.handleSearch}
-                />} />
-                <Route exact path='/home/data/search' component={() => <SearchListStaff handleSearch={this.handleSearch}
-                  arrSearch={this.state.arrSearch} />} />
-                <Route exact path='/home/:id' component={StaffWithId} />
-                <Route path='/phongban' component={() => <PhongBan handleSearch={this.handleSearch}
-                  departments={this.props.departments.departments}
-                  depLoading={this.props.departments.isLoading}
-                  depErrMess={this.props.departments.errMess}
-                  list={this.props.list.list}
-                // detailDepLoading={this.props.detailDep.detailDepLoading}
-                // detailDep={this.props.detailDep.detailDep}
-                // detailDepErr={this.props.detailDep.detailDepErr}
-                />} />
-                <Route exact path='/bangluong' component={() => <BangLuong handleSearch={this.handleSearch}
-                  staffSalary={this.props.staffSalary.staffSalary}
-                  staffSalaryLoading={this.props.staffSalary.isLoading}
-                  staffSalaryErrMess={this.props.staffSalary.errMess} />} />
-                <Route exact path='/bangluong/search' component={() => <SearchBangLuong handleSearch={this.handleSearch}
-                  arrSearch={this.state.arrSearch} />} />
-                <Redirect to='/home' />
-              </Switch>
-            {/* </CSSTransition>
+        <Switch>
+          <Route exact path='/home' component={() => <ListStaff handleSearch={this.handleSearch}
+          />} />
+          <Route exact path='/home/data/search' component={() => <SearchListStaff handleSearch={this.handleSearch}
+            arrSearch={this.state.arrSearch} />} />
+          <Route exact path='/home/:id' component={this.StaffWithId} />
+          <Route path='/phongban' component={() => <PhongBan handleSearch={this.handleSearch}
+            departments={this.props.departments.departments}
+            depLoading={this.props.departments.isLoading}
+            depErrMess={this.props.departments.errMess}
+            list={this.props.list.list}
+          // detailDepLoading={this.props.detailDep.detailDepLoading}
+          // detailDep={this.props.detailDep.detailDep}
+          // detailDepErr={this.props.detailDep.detailDepErr}
+          />} />
+          <Route exact path='/bangluong' component={() => <BangLuong handleSearch={this.handleSearch}
+            staffSalary={this.props.staffSalary.staffSalary}
+            staffSalaryLoading={this.props.staffSalary.isLoading}
+            staffSalaryErrMess={this.props.staffSalary.errMess} />} />
+          <Route exact path='/bangluong/search' component={() => <SearchBangLuong handleSearch={this.handleSearch}
+            arrSearch={this.state.arrSearch} />} />
+          <Redirect to='/home' />
+        </Switch>
+        {/* </CSSTransition>
           </TransitionGroup> */}
-          <Footer />
+        <Footer />
       </div>
     )
   }

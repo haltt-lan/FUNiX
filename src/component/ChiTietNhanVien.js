@@ -4,47 +4,40 @@ import { Link } from 'react-router-dom';
 import { Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import Header from './Header';
 import ModalChinhSua from './ModalChinhSua';
+import { connect } from 'react-redux';
 
 class ChiTietNhanVien extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false,
-            staff: this.props.item
+            show: false
         }
     }
     renderEdit = () => {
         this.setState({ show: !this.state.show })
     }
-    renderChangeStaff = (staffEdit) => {
-        this.setState({
-            staff: staffEdit
-        })
-    }
-
     render() {
-        const dep = this.props.departments.find(x => x.id === this.props.item.departmentId);
-        const { item } = this.props;
-        return item ? (
+        const staff= this.props.list.list.find(x => x.id === this.props.idStaff);
+        return staff ? (
             <Fragment>
                 <Header handleSearch={this.props.handleSearch} />
                 <div className="container">
                     <Breadcrumb>
                         <BreadcrumbItem><Link to='/home' className='text-decoration-none'>Nhân viên</Link></BreadcrumbItem>
-                        <BreadcrumbItem><Link to={`/home/${this.state.staff.id}`} className='text-decoration-none'>{this.state.staff.name}</Link></BreadcrumbItem>
+                        <BreadcrumbItem><Link to={`/home/${staff.id}`} className='text-decoration-none'>{staff.name}</Link></BreadcrumbItem>
                     </Breadcrumb >
                     <div className="row mt-3">
                         <div className='col-lg-3 col-md-4 col-12'>
-                            <img src={this.state.staff.image} alt="Alt" width={200} height={220} />
+                            <img src={staff.image} alt="Alt" width={200} height={220} />
                         </div>
                         <div className='col-lg-9 col-md-8 col-12'>
-                            <p style={{ fontSize: '18px' }}><b>Họ và tên : {this.state.staff.name}</b></p>
-                            <p>Ngày sinh : {dateFormat(this.state.staff.doB, 'dd/mm/yyyy')}</p>
-                            <p>Ngày vào công ty : {dateFormat(this.state.staff.startDate, 'dd/mm/yyyy')}</p>
-                            <p>Phòng ban : {dep.name}</p>
-                            <p>Số ngày nghỉ còn lại : {this.state.staff.annualLeave}</p>
-                            <p>Số ngày đã làm thêm : {this.state.staff.overTime}</p>
-                            <ModalChinhSua staff={this.state.staff} renderEdit={this.renderEdit} show={this.state.show}
+                            <p style={{ fontSize: '18px' }}><b>Họ và tên : {staff.name}</b></p>
+                            <p>Ngày sinh : {dateFormat(staff.doB, 'dd/mm/yyyy')}</p>
+                            <p>Ngày vào công ty : {dateFormat(staff.startDate, 'dd/mm/yyyy')}</p>
+                            <p>Phòng ban : {this.props.departments.departments.find(x => x.id === staff.departmentId).name}</p>
+                            <p>Số ngày nghỉ còn lại : {staff.annualLeave}</p>
+                            <p>Số ngày đã làm thêm : {staff.overTime}</p>
+                            <ModalChinhSua staff={staff} renderEdit={this.renderEdit} show={this.state.show}
                                 renderChangeStaff={this.renderChangeStaff}
                             />
                         </div>
@@ -54,7 +47,10 @@ class ChiTietNhanVien extends Component {
         ) : null
     }
 }
-
-
-
-export default ChiTietNhanVien
+const mapStateToProps = (state) => {
+    return {
+      list: state.list,
+      departments: state.departments
+    }
+  }
+export default connect(mapStateToProps,null)(ChiTietNhanVien)

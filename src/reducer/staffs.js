@@ -18,8 +18,7 @@ export const Staffs = (state = {
 }, action) => {
     switch (action.type) {
         case "ADD_STAFF":
-            var staff = action.payload;
-            console.log('add',state.list.concat(staff));
+            var staff = action.payload;    //payload trả về object
             return { ...state,list:state.list.concat(staff)}
         case "DELETE_STAFF":
             var id = action.payload;
@@ -28,12 +27,7 @@ export const Staffs = (state = {
             state.list.splice(index, 1);
             return {...state }
         case "EDIT_STAFF":
-            console.log('payload:',action.payload);
-            var idEdit = action.payload.id;
-            var indexEdit = findIndex(state, idEdit);
-            var newStaff = action.payload;
-            state.list.splice(indexEdit, 1, newStaff)
-            return { ...state }
+            return { ...state, list:action.payload } //payload trả về array
         case "ADD_LIST":
             return { ...state, isLoading: false, errMess: null, list: action.payload }
         case "LIST_LOADING":

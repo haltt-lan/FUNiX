@@ -28,19 +28,6 @@ export const postStaff = (id, name, doB, startDate, department, salaryScale, ann
         },
         credentials: "same-origin"
     })
-        // .then(response => {
-        //     if (response.ok) {
-        //         return response
-        //     } else {
-        //         var error = new Error('Error' + response.status + ':' + response.statusText);
-        //         error.response = response;
-        //         throw error;
-        //     }
-        // },
-        //     error => {
-        //         throw error;
-        //     })
-        // .then(response => response.json())
         .then(() => dispatch(addStaff(newStaff)))
         .catch(error => {
             console.log('post staff', error.message);
@@ -97,22 +84,6 @@ export const deleteStaff = (id) => dispatch => {
         },
         credentials: "same-origin"
     })
-
-        // .then(response => {
-        //     if (response.ok) { return response }
-        //     else {
-        //         var error = new Error('Error ' + response.status + ':' + response.statusText);
-        //         error.response = response;
-        //         console.log(error);
-        //         throw error;
-        //     }
-        // },
-        //     error => {
-        //         var errMess = new Error(error.message);
-        //         throw errMess;
-        //     }
-        // )
-        // .then(response => response.json())
         .then(()=> dispatch(delStaff(id)))
         .catch(error => { console.log('delete staff', error.message) });
 
